@@ -14,28 +14,31 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 2365932010ebc9e73e7a02ecdc0c17c785fc45b0 Changes
-SHA1 8b0c4d3fb01aa7556d25c9b448359581146ab154 MANIFEST
-SHA1 ef8183e23f51abb77c6b75e108249225d0db6107 META.yml
-SHA1 a1c7cd0161d63b70e4f47e96b4834e5efe84fa83 Makefile.PL
-SHA1 a1ad81917109847d60f5d37797baac74969d5332 README
-SHA1 cbbfba67c3289d6f6d78fff1925c92c2b277b5a3 bin/uni
-SHA1 fd5f3c4f0418efee3b9b16cf8c3902e8374909df inc/Module/Install.pm
-SHA1 7cd7c349afdf3f012e475507b1017bdfa796bfbd inc/Module/Install/Base.pm
-SHA1 ba186541bbf6439111f01fc70769cf24d22869bf inc/Module/Install/Can.pm
-SHA1 aaa50eca0d7751db7a4d953fac9bc72c6294e238 inc/Module/Install/Fetch.pm
-SHA1 3e83972921d54198d1246f7278f08664006cd65d inc/Module/Install/Makefile.pm
-SHA1 12bf1867955480d47d5171a9e9c6a96fabe0b58f inc/Module/Install/Metadata.pm
+SHA1 e878b361b232bcd6aa26ca393dcf44c02f64233c Changes
+SHA1 bf0b05f0b1d5cc51c18a092762648b83000497a9 MANIFEST
+SHA1 5856371708e2c932f708b9b824d6cc0ab8a02cc7 META.yml
+SHA1 ca757b1096d896c0103c7aef33a5b2f4bae02d9d Makefile.PL
+SHA1 5dff6f12bf3825d941633b41623b36c8345182a4 README
+SHA1 35ca0c7cb5f0ef77174762f73a3127bc4fefcf90 README.mkdn
+SHA1 5d9e3ac56c11a6d66ac6b8cb7f7828821dcff55c bin/uni
+SHA1 1ebec4119486a032a5612a403e8d7b7be973e938 inc/Module/Install.pm
+SHA1 24038af925a69df41972971356ccce885b0fe2ad inc/Module/Install/Base.pm
+SHA1 8f96eddfef548c9328457fbb17a121631cda356b inc/Module/Install/Can.pm
+SHA1 ec29048e48edd9c9c55f9de7b773bd7c904335ad inc/Module/Install/Fetch.pm
+SHA1 0384525d85d51e99532e3ad8729d870113646d14 inc/Module/Install/Makefile.pm
+SHA1 38c657de4d91f5a60ff8e6c6f6a5547daf7c4ab2 inc/Module/Install/Metadata.pm
 SHA1 a615bb050ca0b2d79bfa0224addcb83019a53b09 inc/Module/Install/ReadmeFromPod.pm
-SHA1 3406c9015148c75406903e7382f8182613b5022a inc/Module/Install/Scripts.pm
-SHA1 f7ee667e878bd2faf22ee9358a7b5a2cc8e91ba4 inc/Module/Install/Win32.pm
-SHA1 8ed29d6cf217e0977469575d788599cbfb53a5ca inc/Module/Install/WriteAll.pm
-SHA1 b6a785b89ce444f63c3b59c356baabe8ec697835 lib/App/Uni.pm
+SHA1 df9c9305e679448a43827318eb9a95a6b0a85840 inc/Module/Install/ReadmeMarkdownFromPod.pm
+SHA1 f74fc88b2820caf7c3e50a1108b377aa4abdb275 inc/Module/Install/Scripts.pm
+SHA1 5c25f1104c0038041e3b93e0660c39171e4caf2b inc/Module/Install/Win32.pm
+SHA1 94d47349c803c4bd2a9230d25e4db0b6aaf1acd8 inc/Module/Install/WriteAll.pm
+SHA1 d5cf50fe8afa096cb2bc301fd692e17d561622e1 inc/Pod/Markdown.pm
+SHA1 595711f92833ae2bfe003f1536fc27a8b727b9ed lib/App/Uni.pm
 SHA1 41afe2c04bb573b40e283e2b210ed70a47a3f8ba t/0-signature.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (Darwin)
 
-iEYEARECAAYFAksgPW0ACgkQtLPdNzw1AaD21QCgmGUzA+n7VbiJgIunAIoCUhV9
-I+MAnjbxEJeFnyW+OdKjNda40SuXSPjw
-=iRNL
+iEYEARECAAYFAkvEdlMACgkQtLPdNzw1AaDK9gCdEajlVu69g/VM9tb9AIAXS2ig
+8TEAoIO1qTq+Cme8IxMhmIQaB1OopEJf
+=28v6
 -----END PGP SIGNATURE-----
