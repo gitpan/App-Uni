@@ -9,6 +9,7 @@ inc/Module/Install/Metadata.pm
 inc/Module/Install/ReadmeFromPod.pm
 inc/Module/Install/ReadmeMarkdownFromPod.pm
 inc/Module/Install/Scripts.pm
+inc/Module/Install/Share.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 inc/Pod/Markdown.pm
@@ -18,5 +19,6 @@ MANIFEST			This list of files
 META.yml
 README
 README.mkdn
+share/UnicodeData.txt
 SIGNATURE
 t/0-signature.t
