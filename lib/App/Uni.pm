@@ -1,5 +1,5 @@
 use v5.12.0;
-package App::Uni v0.14.0;
+package App::Uni v5.14.0;
 use open ':std' => ':utf8';
 use File::ShareDir 'dist_dir';
 

@@ -17,6 +17,6 @@ repository     'http://github.com/audreyt/app-uni';
 install_script 'bin/uni';
 install_share  'share';
 
-sign; WriteAll;
+WriteAll;
 
 1;
