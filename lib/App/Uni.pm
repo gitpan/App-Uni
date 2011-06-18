@@ -1,29 +1,40 @@
-use v5.12.0;
-package App::Uni v5.14.0;
-use open ':std' => ':utf8';
-use File::ShareDir 'dist_dir';
+#!/usr/bin/perl
+package App::Uni;
+use 5.008;
+use strict;
+use warnings;
+
+our $VERSION = 6;
 
 sub main {
-    my $dir = dist_dir('App-Uni');
-    my $file = "$dir/UnicodeData.txt";
-    (-f $file and -r $file)
-        or die "Cannot find UnicodeData.txt in $dir";
+    binmode STDOUT, ':utf8';
+    my $regex = join ' ', @_;
+    utf8::decode($regex);
 
-    utf8::decode(
-        my $regex = join(' ', @_)
-    );
-
-    if (length $regex == 1) {
-        $regex = sprintf('(?:%s|%04X)', $regex, ord $regex);
+    if (length $regex == 1 and ord($regex) >= 128) {
+        require charnames;
+        printf "%04X %s %s$/", ord $regex, $regex, charnames::viacode(ord $regex);
+        exit;
     }
 
-    open my $fh, '<:mmap', $file;
-    for (<$fh>) {
-        if (/$regex/io and my ($code, $name) = /(\w+);([^;]+)/) {
-            say $code, ' ', chr hex $code, ' ', $name
-                if [$name, $code] ~~ /$regex/io;
-        }
+    my $str = require 'unicore/Name.pl';
+
+    open my $fh, '<', \$str
+        or die "Cannot open unicore data: $!$/";
+
+    while (<$fh>) {
+        chomp;
+        (/$regex/io and /(.+)\t([^;]+)/) or next;
+
+        my ($code, $name) = ($1, $2);
+        ($name =~ /$regex/io or $code =~ /$regex/io) or next;
+
+        next if $code =~ / /; # if we want to avoid named sequences
+        $code =~ s/^0(....)/$1/;
+        my $chr = join q{}, map {; chr hex } split /\s+/, $code;
+        print $code, ' ', $chr, ' ', $name, $/;
     }
+
     close $fh;
 }
 
@@ -39,7 +50,7 @@ App::Uni - Command-line utility to grep UnicodeData.txt
 
 =head1 VERSION
 
-This document describes version v0.14.0 of App::Uni, released June 7, 2011.
+This document describes version 6 of App::Uni, released June 19, 2011.
 
 =head1 SYNOPSIS
 
@@ -53,14 +64,14 @@ This document describes version v0.14.0 of App::Uni, released June 7, 2011.
 =head1 DESCRIPTION
 
 This module installs a simple program, F<uni>, that helps grepping through
-the Unicode database (bundled with this distribution).
+the Unicode database included in the current Perl 5 installation.
 
 The arguments to the F<uni> program are joined with space and interpreted
 as a regular expression.  Character codes or names matching the regex
 (case-insensitively) are then printed out.
 
-If the argument is a single character, then the character itself is also
-printed out in addition to code and name matches.
+If the argument is a single non-ASCII character, then the character itself
+is printed instead.
 
 =head1 ACKNOWLEDGEMENTS
 

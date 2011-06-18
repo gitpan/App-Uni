@@ -1,0 +1,45 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.66.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 0c9cb1fda0cd88a3fb3619856cea4c9af208aafe Changes
+SHA1 3f3f536cc96f0f674577efdaa636e8f89a95b3d9 MANIFEST
+SHA1 9f95c6a69ac602eb9b2a09c9f3bbfd0ca4ea2a08 META.yml
+SHA1 a0d026533394620e490b14a24ef22228731900bf Makefile.PL
+SHA1 2f0756492ad4be98dea5adbacfad671effa05491 README
+SHA1 191d1527ace6a30f9c5d65f539aadf079a7a25a3 README.mkdn
+SHA1 5d9e3ac56c11a6d66ac6b8cb7f7828821dcff55c bin/uni
+SHA1 7b4ae50ebac72d20761171c4c2b50c206344ea40 inc/Module/Install.pm
+SHA1 d9fe55a427fe2fd75b5029afeeaa61b592e07f79 inc/Module/Install/Base.pm
+SHA1 62d3922826d9f89f20c185e7031ac8f028504745 inc/Module/Install/Can.pm
+SHA1 dc809f64fb70a26b069a36f8d3d353d520dbb7e1 inc/Module/Install/Fetch.pm
+SHA1 842aecffd1b6f9f3c1deeaf33291f624f2b4e9f3 inc/Module/Install/GithubMeta.pm
+SHA1 73ab91490a628452cc140db72ef9d13a1326d211 inc/Module/Install/Makefile.pm
+SHA1 8ce3f2b414e4617e6233dd4ba10830f8c5d672ec inc/Module/Install/Metadata.pm
+SHA1 db56372d57faebf96ef4872afbb108b2fb2bd451 inc/Module/Install/Package.pm
+SHA1 df6d79398107ac47d0f4b381a997960f3b081716 inc/Module/Install/Scripts.pm
+SHA1 3b0acd2eeac93a0afe48120f5648f0db362e5bbf inc/Module/Install/Win32.pm
+SHA1 f08924f051e623f8e09fa6a121993c4a9cf7d9eb inc/Module/Install/WriteAll.pm
+SHA1 182be42665c19c4b9b6380a101be3ca767bc6b96 inc/Module/Package.pm
+SHA1 ccb48d3fec5ef96403f50b13eec529ce10961c02 inc/Pod/Markdown.pm
+SHA1 2470298566a50f9186a5740f609bfad5fdd9602b lib/App/Uni.pm
+SHA1 41afe2c04bb573b40e283e2b210ed70a47a3f8ba t/0-signature.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (Darwin)
+
+iEYEARECAAYFAk39L5QACgkQtLPdNzw1AaAkWwCgvEg7AVJXyxe69VkA8UvV1gjo
+AdMAnj+9FbxiN9774T098MpvRgpUKXHi
+=0w4a
+-----END PGP SIGNATURE-----
