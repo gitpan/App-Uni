@@ -8,9 +8,6 @@ configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
 generated_by: 'Module::Install version 1.01'
-keywords:
-  - app
-  - unicode
 license: cc0
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -23,11 +20,10 @@ no_index:
     - t
 requires:
   perl: 5.8.0
-  version: 0
 resources:
   homepage: http://github.com/audreyt/app-uni/tree
   repository:
     type: git
     url: git://github.com/audreyt/app-uni.git
     web: http://github.com/audreyt/app-uni/tree
-version: 5.014001
+version: 7
