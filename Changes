@@ -1,3 +1,11 @@
+Revision history for App-Uni
+
+9.000     2014-10-24 12:34:12-04:00 America/New_York
+        * total rewrite, done with much love, by rjbs
+        * now supports lookup by hex code
+        * now supports single ascii char lookup
+        * now supports multiple fixed substring lookup
+
 [Changes for v8 - 2011年 7月 6日 周三 08時32分43秒 CST]
 
 * Add advertisement for user to upgrade to Perl 5.14 just
@@ -54,3 +62,4 @@
 [Changes for 0.01 - 2009年12月10日 周四 07時59分22秒 CST]
 
 * First CPAN release.
+
