@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package App::Uni;
 # ABSTRACT: command-line utility to find or display Unicode characters
-$App::Uni::VERSION = '9.000';
+$App::Uni::VERSION = '9.001';
 #pod =encoding utf8
 #pod
 #pod =head1 NAME
@@ -53,16 +53,19 @@ sub run {
   my ($class, @argv) = @_;
 
   if (! @argv or $argv[0] eq '--help') {
-    die join qq{\n}, "usage:",
-      "  uni ONE-CHARACTER    - print the codepoint and name of character",
-      "  uni SEARCH-TERMS...  - search for codepoints with matching names",
-      "  uni -c STRINGS...    - print out the codepoints in a string",
-      "  uni -u CODEPOINTS... - look up and print hex codepoints\n";
+    die join qq{\n  }, "usage:",
+      "uni SEARCH-TERMS...    - find codepoints with matching names or values",
+      "uni [-s] ONE-CHARACTER - print the codepoint and name of one character",
+      "uni -n SEARCH-TERMS... - find codepoints with matching names",
+      "uni -c STRINGS...      - print out the codepoints in a string",
+      "uni -u CODEPOINTS...   - look up and print hex codepoints\n";
   }
 
   my $todo;
-  $todo = \&split_string if @argv && $argv[0] eq '-c';
-  $todo = \&codepoints   if @argv && $argv[0] eq '-u';
+  $todo = \&do_explode    if @argv && $argv[0] eq '-c';
+  $todo = \&do_u_numbers  if @argv && $argv[0] eq '-u';
+  $todo = \&do_names      if @argv && $argv[0] eq '-n';
+  $todo = \&do_single     if @argv && $argv[0] eq '-s';
 
   shift @argv if $todo;
 
@@ -72,30 +75,42 @@ sub run {
   }
 
   $todo //= @argv == 1 && length $argv[0] == 1
-          ? \&one_char
-          : \&search_chars;
+          ? \&do_single
+          : \&do_dwim;
 
-  $todo->(@argv);
+  $todo->(\@argv);
 }
 
-sub one_char {
+sub do_single {
   print_chars(@_);
 }
 
-sub split_string {
-  my (@args) = @_;
+sub do_explode {
+  print_chars( explode_strings(@_) );
+}
 
-  while (my $str = shift @args) {
-    my @chars = split '', $str;
-    print_chars(@chars);
+sub explode_strings {
+  my ($strings) = @_;
 
-    say '' if @args;
+  my @chars;
+
+  while (my $str = shift @$strings) {
+    push @chars, split '', $str;
+    push @chars, undef if @$strings;
   }
+
+  return \@chars;
+}
+
+sub do_u_numbers {
+  print_chars( chars_by_u_numbers(@_) );
 }
 
 sub print_chars {
-  my (@chars) = @_;
-  for my $c (@chars) {
+  my ($chars) = @_;
+
+  for my $c (@$chars) {
+    unless (defined $c) { print "\n"; next }
 
     my $c2 = Unicode::GCString->new($c);
     my $l  = $c2->columns;
@@ -119,15 +134,29 @@ sub print_chars {
   }
 }
 
-sub codepoints {
-  my (@points) = @_;
-
-  my @chars = map {; chr hex s/\Au\+//r } @points;
-  print_chars(@chars);
+sub chars_by_u_numbers {
+  my ($points) = @_;
+  my @chars = map {; /\A(?:u\+)?(.+)/; chr hex $1 } @$points;
+  return \@chars;
 }
 
-sub search_chars {
-  my @terms = map {; s{\A/(.+)/\z}{$1} ? qr/$_/i : qr/\b$_\b/i } @_;
+sub do_names {
+  my ($terms) = @_;
+
+  print_chars( chars_by_name( $terms ) );
+}
+
+sub chars_by_name {
+  my ($input_terms, $arg) = @_;
+  my @terms = map {; { pattern => s{\A/(.+)/\z}{$1} ? qr/$_/i : qr/\b$_\b/i } }
+              @$input_terms;
+
+  if ($arg && $arg->{match_codepoints}) {
+    for (0 .. $#terms) {
+      $terms[$_]{ord} = hex $input_terms->[$_]
+        if $input_terms->[$_] =~ /\A[0-9A-Fa-f]+\z/;
+    }
+  }
 
   my $corpus = require 'unicore/Name.pl';
   die "somebody beat us here" if $corpus eq '1';
@@ -140,14 +169,31 @@ sub search_chars {
     my $i = index($line, "\t");
     next if rindex($line, " ", $i) >= 0; # no sequences
 
-    $line =~ $_ || next LINE for @terms;
+    my $name = substr($line, $i+1);
+    my $ord  = hex substr($line, 0, $i);
+
+    for (@terms) {
+      next LINE unless $name =~ $_->{pattern}
+                or     defined $_->{ord} && $_->{ord} == $ord;
+    }
 
     my $c = chr hex substr $line, 0, $i;
     next if $seen{$c}++;
     push @chars, chr hex substr $line, 0, $i;
   }
 
-  print_chars(@chars);
+  return \@chars;
+}
+
+sub smerge {
+  my %splat = map {; $_ => 1 } map { @$_ } @_;
+  return [ sort keys %splat ];
+}
+
+sub do_dwim {
+  my ($argv) = @_;
+  my $chars = chars_by_name($argv, { match_codepoints => 1 });
+  print_chars($chars);
 }
 
 1;
@@ -164,7 +210,7 @@ App::Uni - command-line utility to find or display Unicode characters
 
 =head1 VERSION
 
-version 9.000
+version 9.001
 
 =head1 SYNOPSIS
 

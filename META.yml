@@ -24,7 +24,7 @@ resources:
   bugtracker: https://github.com/rjbs/App-Uni/issues
   homepage: https://github.com/rjbs/App-Uni
   repository: https://github.com/rjbs/App-Uni.git
-version: '9.000'
+version: '9.001'
 x_Dist_Zilla:
   perl:
     version: '5.021005'
@@ -305,7 +305,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: '9.000'
+          tag: '9.001'
           tag_format: '%v'
           tag_message: v%v
           time_zone: local
